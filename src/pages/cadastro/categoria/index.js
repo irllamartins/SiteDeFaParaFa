@@ -4,7 +4,7 @@ import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
-
+import CategoriaRepository from '../../../repositories/categorias';
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -33,25 +33,7 @@ function CadastroCategoria() {
         ]);
       })
       },[]);
-    /*setTimeout(() =>{
-      setCategorias([
-        ...categorias,
-        
-      {
-      id:1,
-      nome: "Front end",
-      descricao: "um exemplo",
-      cor: "#cbd1ff",
-      },
-      {
-          id:2,
-          nome: "Back end",
-          descricao: "Outro exemplo",
-          cor: "#cbd1ff",
-          }
-
-      ]);
-    },4*1000);*/
+   
 
   return (
     <PageDefault>
@@ -63,7 +45,18 @@ function CadastroCategoria() {
             ...categorias,
             values
           ]);
+           /////
+          CategoriaRepository.create({
+            titulo: values.nome,
+            descricao: values.descricao,
+            cor: values.cor,
+          })
 
+          .then(() => {
+            console.log('Cadastrou com sucesso');
+            //history.push('/');
+          });
+          //////
           clearForm();
       }}>
 
